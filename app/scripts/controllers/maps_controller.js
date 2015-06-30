@@ -1,7 +1,7 @@
 /*
     An HTML5 mobile app for navigating & browsing locations of public art, 
     architecture, and culture in Norfolk, VA. 
-    Copyright (C) 2014 Ryan Y.
+    Copyright (C) 2014 Code for Hampton Roads contributors
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,12 +24,20 @@
 Norfolkart.MapController = Ember.ArrayController.extend({
     // Implement your controller here.
 
-    /** Represents the map centre.
+    /** Represents the current map centre.
       *
       * @property centre
-      * @type Position
+      * @type L.LatLng
       * @default L.latLng(36.84765224454971, -76.2922677397728) */
     centre: L.latLng(36.84765224454971, -76.2922677397728),
+
+
+    /** Represents the current map zoom.
+      *
+      * @property zoom
+      * @type Number
+      * @default 16 */
+    zoom: 16,
 
     actions: {
         /** Computation, public access to the geolocation function. 
@@ -64,6 +72,7 @@ Norfolkart.MapController = Ember.ArrayController.extend({
                     position.coords.latitude,
                     position.coords.longitude
                 ));
+                controller.transitionToRoute('map');
             },
             this.positionError
         );
@@ -83,7 +92,7 @@ Norfolkart.MapController = Ember.ArrayController.extend({
             'Timeout.'
         ];
         alert(
-            messages.indexOf(error.code - 1) > -1 ?
+            error.code - 1 > -1 ?
                     messages[error.code - 1] :
                     'Unknown error.'
         );

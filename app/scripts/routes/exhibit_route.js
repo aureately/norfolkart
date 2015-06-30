@@ -1,7 +1,7 @@
 /*
     An HTML5 mobile app for navigating & browsing locations of public art, 
     architecture, and culture in Norfolk, VA. 
-    Copyright (C) 2014 Ryan Y.
+    Copyright (C) 2014 Code for Hampton Roads contributors
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,8 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Norfolkart.ExhibitRoute = Ember.Route.extend({
-  model: function(params) {
-    return this.get('store').find('exhibit', params.exhibit_id);
-  }
+    model: function (params) {
+        'use strict';
+        return this.get('store').find('exhibit', params.exhibit_id);
+    }
 });
 
